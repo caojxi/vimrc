@@ -26,7 +26,7 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
-Plugin 'Yggdroot/indentLine'
+" Plugin 'Yggdroot/indentLine'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ap/vim-css-color'
 Plugin 'airblade/vim-gitgutter'
@@ -38,12 +38,13 @@ Plugin 'posva/vim-vue'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-Plugin 'Shougo/unite.vim'
-Plugin 'honza/vim-snippets'
+" Plugin 'Shougo/unite.vim'
+" Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
-Plugin 'mhinz/vim-startify'
+" Plugin 'mhinz/vim-startify'
 Plugin 'chriskempson/base16-vim'
 Plugin 'godlygeek/tabular.git'
+Plugin 'caojxi/my-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -91,6 +92,7 @@ map g# <Plug>(incsearch-nohl-g#)
 
 " Ctrlp
 set runtimepath^=~/.vim/bundle/ctrlp.vim
+let g:ctrlp_by_filename = 0
 nnoremap <Leader>r :CtrlPFunky<Cr>
 nmap <C-r> <leader>r
 let g:ctrlp_funky_matchtype = 'path'
@@ -160,16 +162,17 @@ let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 
 " Indent line
-let g:indentLine_leadingSpaceEnabled = 1
+" let g:indentLine_leadingSpaceEnabled = 1
 " let g:indentLine_char = '┊'
+let g:indent_guides_guide_size = 1
 
 " Multiple cursors
-let g:multi_cursor_next_key='<C-s>'
+let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-a>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
-"Note: This option must set it in .vimrc(_vimrc).  NOT IN .gvimrc(_gvimrc)!
+" Neocomplete
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -232,10 +235,10 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " Enable snipMate compatibility feature.
 "let g:neosnippet#enable_snipmate_compatibility = 1
 " Tell Neosnippet about the other snippets
-let g:neosnippet#snippets_directory='~/.vim/bundle/vim-snippets/snippets'
+let g:neosnippet#snippets_directory='~/.vim/bundle/my-snippets/snippets'
 
 " Unite
-map <leader>b :Unite buffer<cr>
+" map <leader>b :Unite buffer<cr>
 
 " Gitgutter
 let g:gitgutter_sign_column_always = 1
