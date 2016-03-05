@@ -5,7 +5,7 @@
 if has("gui_gtk2")
     set guifont=Hack\ 13
 elseif has("gui_macvim")
-    set guifont=Hack:h13
+    set guifont=Hack:h14
 end
 
 set linespace=4

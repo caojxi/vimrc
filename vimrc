@@ -34,7 +34,7 @@ Plugin 'tacahiroy/ctrlp-funky'
 Plugin 'haya14busa/incsearch.vim'
 Plugin 'rking/ag.vim'
 Plugin 'jwalton512/vim-blade'
-Plugin 'posva/vim-vue'
+Plugin 'darthmall/vim-vue'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
@@ -45,6 +45,7 @@ Plugin 'majutsushi/tagbar'
 Plugin 'chriskempson/base16-vim'
 Plugin 'godlygeek/tabular.git'
 Plugin 'caojxi/my-snippets'
+" Plugin 'kshenoy/vim-signature'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -94,13 +95,18 @@ map g# <Plug>(incsearch-nohl-g#)
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_by_filename = 0
 nnoremap <Leader>r :CtrlPFunky<Cr>
-nmap <C-r> <leader>r
+nmap <c-r> <leader>r
 let g:ctrlp_funky_matchtype = 'path'
 let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
+" Toggle most recent file
+map <leader>e :CtrlPMRUFiles<cr>
+nmap <c-e> <leader>e
 
+" Commentory
+autocmd FileType blade setlocal commentstring={{--\ %s
 " Tagbar
 nmap <F1> :TagbarToggle<CR>
 
@@ -246,47 +252,6 @@ let g:gitgutter_sign_column_always = 1
 " au BufNewFile,BufRead *.vue setfiletype html
 " au BufNewFile,BufRead *.vue set filetype=html
 
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" Maintainer:
-"       Amir Salihefendic
-"       http://amix.dk - amix@amix.dk
-"
-" Version:
-"       5.0 - 29/05/12 15:43:36
-"
-" Blog_post:
-"       http://amix.dk/blog/post/19691#The-ultimate-Vim-configuration-on-Github
-"
-" Awesome_version:
-"       Get this config, nice color schemes and lots of plugins!
-"
-"       Install the awesome version from:
-"
-"           https://github.com/amix/vimrc
-"
-" Syntax_highlighted:
-"       http://amix.dk/vim/vimrc.html
-"
-" Raw_version:
-"       http://amix.dk/vim/vimrc.txt
-"
-" Sections:
-"    -> General
-"    -> VIM user interface
-"    -> Colors and Fonts
-"    -> Files and backups
-"    -> Text, tab and indent related
-"    -> Visual mode related
-"    -> Moving around, tabs and buffers
-"    -> Status line
-"    -> Editing mappings
-"    -> vimgrep searching and cope displaying
-"    -> Spell checking
-"    -> Misc
-"    -> Helper functions
-"
-"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -298,7 +263,7 @@ set history=500
 filetype plugin on
 filetype indent on
 
-" No blinking
+" No cursor blinking
 set gcr=n:blinkon0
 set guicursor+=a:blinkon0
 
@@ -515,10 +480,6 @@ map <C-l> <C-W>l
 " Close the current buffer
 map <leader>bd :Bclose<cr>:tabclose<cr>gT
 
-" Toggle most recent file
-map <leader>e :CtrlPMRUFiles<cr>
-nmap <C-e> <leader>e
-
 " Quick buffer switching
 nnoremap <silent> [b :bprevious<CR>
 nnoremap <silent> ]b :bnext<CR>
@@ -618,8 +579,8 @@ map <leader>g :Ag
 " To go to the previous search results do:
 "   <leader>p
 "
-" map <leader>cc :botright cope<cr>
-" map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
+map <leader>cc :botright cope<cr>
+map <leader>co ggVGy:tabnew<cr>:set syntax=qf<cr>pgg
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
