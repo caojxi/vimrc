@@ -565,8 +565,8 @@ vnoremap <silent> gv :call VisualSelection('gv', '')<CR>
 " Open Ag and put the cursor in the right position
 map <leader>g :Ag
 
-" When you press <leader>r you can search and replace the selected text
-" vnoremap <silent> <leader>r :call VisualSelection('replace', '')<CR>
+" When you press <leader>rr you can search and replace the selected text
+vnoremap <silent> <leader>rr :call VisualSelection('replace', '')<CR>
 
 " Do :help cope if you are unsure what cope is. It's super useful!
 "
@@ -641,7 +641,6 @@ function! VisualSelection(direction, extra_filter) range
     let @/ = l:pattern
     let @" = l:saved_reg
 endfunction
-
 
 " Returns true if paste mode is enabled
 function! HasPaste()
