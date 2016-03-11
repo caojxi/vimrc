@@ -1,6 +1,10 @@
 set nocompatible              " be iMproved, required
 filetype off                  " required
 
+" With a map leader it's possible to do extra key combinations
+let mapleader = ","
+let g:mapleader = ","
+
 " set the runtime path to include Vundle and initialize
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -26,7 +30,6 @@ Plugin 'terryma/vim-multiple-cursors'
 Plugin 'easymotion/vim-easymotion'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'Raimondi/delimitMate'
-" Plugin 'Yggdroot/indentLine'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'ap/vim-css-color'
 Plugin 'airblade/vim-gitgutter'
@@ -38,14 +41,10 @@ Plugin 'darthmall/vim-vue'
 Plugin 'Shougo/neocomplete'
 Plugin 'Shougo/neosnippet'
 Plugin 'Shougo/neosnippet-snippets'
-" Plugin 'Shougo/unite.vim'
-" Plugin 'honza/vim-snippets'
 Plugin 'majutsushi/tagbar'
-" Plugin 'mhinz/vim-startify'
 Plugin 'chriskempson/base16-vim'
-Plugin 'godlygeek/tabular.git'
 Plugin 'caojxi/my-snippets'
-" Plugin 'kshenoy/vim-signature'
+" Plugin 'honza/vim-snippets'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
@@ -53,33 +52,22 @@ filetype plugin indent on    " required
 " To ignore plugin indent changes, instead use:
 "filetype plugin on
 "
-" Brief help
-" :PluginList       - lists configured plugins
-" :PluginInstall    - installs plugins; append `!` to update or just :PluginUpdate
-" :PluginSearch foo - searches for foo; append `!` to refresh local cache
-" :PluginClean      - confirms removal of unused plugins; append `!` to auto-approve removal
-"
 " see :h vundle for more details or wiki for FAQ
 " Put your non-Plugin stuff after this line
 
-" With a map leader it's possible to do extra key combinations
-" like <leader>w saves the current file
-let mapleader = ","
-let g:mapleader = ","
+"""""""""""""""""""
+" Plugins Settings
+"""""""""""""""""""
 
+""""""""""""""
 " delimitMate
+""""""""""""""
 let delimitMate_expand_cr=1
 let delimitMate_jump_expansion=0
 
-" Tabularize
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
-
+""""""""""""
 " Incsearch
+""""""""""""
 let g:incsearch#auto_nohlsearch = 1
 map /  <Plug>(incsearch-forward)
 map ?  <Plug>(incsearch-backward)
@@ -91,13 +79,12 @@ map #  <Plug>(incsearch-nohl-#)
 map g* <Plug>(incsearch-nohl-g*)
 map g# <Plug>(incsearch-nohl-g#)
 
-" Ctrlp
+"""""""""""""""""""""
+" CtrlP + CtrlPFunky
+"""""""""""""""""""""
+nmap <leader>t <c-p>
 set runtimepath^=~/.vim/bundle/ctrlp.vim
 let g:ctrlp_by_filename = 0
-nnoremap <Leader>r :CtrlPFunky<Cr>
-nmap <c-r> <leader>r
-let g:ctrlp_funky_matchtype = 'path'
-let g:ctrlp_funky_syntax_highlight = 1
 let g:ctrlp_show_hidden = 1
 let g:ctrlp_match_window = 'bottom,order:btt,min:1,max:20,results:20'
 let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
@@ -105,20 +92,35 @@ let g:ctrlp_custom_ignore = 'node_modules\DS_Store\|git'
 map <leader>e :CtrlPMRUFiles<cr>
 nmap <c-e> <leader>e
 
+nnoremap <Leader>r :CtrlPFunky<Cr>
+nnoremap <Leader>R :execute 'CtrlPFunky ' . expand('<cword>')<Cr>
+nmap <c-r> <leader>r
+let g:ctrlp_funky_matchtype = 'path'
+let g:ctrlp_funky_sort_by_mru = 1
+let g:ctrlp_funky_syntax_highlight = 1
+
+"""""""""""""
 " Commentory
+"""""""""""""
 autocmd FileType blade setlocal commentstring={{--\ %s
+
+"""""""""
 " Tagbar
+"""""""""
 nmap <F1> :TagbarToggle<CR>
 
-" Theme
+"""""""""""""""
+" Vim-material
+"""""""""""""""
 let g:enable_bold_font = 1
 " colorscheme hybrid_reverse
 colorscheme hybrid_material
 " colorscheme base16-default
-
 let g:airline_theme = "hybrid"
 
+"""""""""""
 " Air-line
+"""""""""""
 let g:airline#extensions#tabline#enabled = 1
 if !exists('g:airline_symbols')
   let g:airline_symbols = {}
@@ -138,7 +140,6 @@ let g:airline_symbols.paste = 'Þ'
 let g:airline_symbols.paste = '∥'
 let g:airline_symbols.notexists = '∄'
 let g:airline_symbols.whitespace = 'Ξ'
-
 " powerline symbols
 let g:airline_left_sep = ''
 let g:airline_left_alt_sep = ''
@@ -148,17 +149,23 @@ let g:airline_symbols.branch = ''
 let g:airline_symbols.readonly = ''
 let g:airline_symbols.linenr = ''
 
+""""""""
 " Emmet
+""""""""
 let g:user_emmet_leader_key='<C-E>'
 
+"""""""""""
 " Nerdtree
+"""""""""""
 map <leader>n :NERDTreeToggle<CR>
 map <leader>nn :NERDTreeFind<CR>
 
+""""""""""""
 " Systastic
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
+""""""""""""
+" set statusline+=%#warningmsg#
+" set statusline+=%{SyntasticStatuslineFlag()}
+" set statusline+=%*
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
 let g:syntastic_check_on_open = 1
@@ -167,18 +174,22 @@ let g:syntastic_enable_signs = 1
 let g:syntastic_php_checkers=['php', 'phpcs']
 let g:syntastic_php_phpcs_args='--standard=PSR2 -n'
 
-" Indent line
-" let g:indentLine_leadingSpaceEnabled = 1
-" let g:indentLine_char = '┊'
+""""""""""""""""
+" Indent Guide
+""""""""""""""""
 let g:indent_guides_guide_size = 1
 
+"""""""""""""""""""
 " Multiple cursors
+"""""""""""""""""""
 let g:multi_cursor_next_key='<C-m>'
 let g:multi_cursor_prev_key='<C-a>'
 let g:multi_cursor_skip_key='<C-x>'
 let g:multi_cursor_quit_key='<Esc>'
 
+""""""""""""""
 " Neocomplete
+""""""""""""""
 " Disable AutoComplPop.
 let g:acp_enableAtStartup = 0
 " Use neocomplete.
@@ -203,8 +214,8 @@ endif
 let g:neocomplete#keyword_patterns['default'] = '\h\w*'
 
 " Plugin key-mappings.
-inoremap <expr><C-g>     neocomplete#undo_completion()
-inoremap <expr><C-l>     neocomplete#complete_common_string()
+" inoremap <expr><C-g>     neocomplete#undo_completion()
+" inoremap <expr><C-l>     neocomplete#complete_common_string()
 
 " Recommended key-mappings.
 " <CR>: close popup and save indent.
@@ -243,15 +254,17 @@ smap <expr><TAB> neosnippet#expandable_or_jumpable() ?
 " Tell Neosnippet about the other snippets
 let g:neosnippet#snippets_directory='~/.vim/bundle/my-snippets/snippets'
 
-" Unite
-" map <leader>b :Unite buffer<cr>
-
+""""""""""""
 " Gitgutter
+""""""""""""
 let g:gitgutter_sign_column_always = 1
 
 " au BufNewFile,BufRead *.vue setfiletype html
 " au BufNewFile,BufRead *.vue set filetype=html
 
+"""""""""""""""""""""""
+" End Plugins Settings
+"""""""""""""""""""""""
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " => General
@@ -286,6 +299,7 @@ inoremap <c-b> <c-o>h
 inoremap <c-right> <c-o>A
 inoremap <c-l> <c-o>A
 inoremap <c-left> <c-o>I
+inoremap <c-k> <c-o>I
 
 " Format file
 map <leader>f mmgg=G`m
@@ -453,7 +467,7 @@ nmap cw ciw
 nmap dw diw
 
 " Map jj to Esc
-imap jj <esc>
+imap jj <esc>:w<cr>
 " Map : to <leader><space>
 map <leader><space> :
 " Fast show buffer
