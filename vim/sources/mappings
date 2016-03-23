@@ -1,0 +1,107 @@
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Moving around, tabs, windows and buffers
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" Fast saving
+nmap <leader>s :w!<cr>
+nmap <C-s> <leader>s
+" Ctrl s saving
+inoremap <c-s> <c-o>:w!<cr>
+nmap <leader>v "*p
+
+" U for redo
+nmap U :red<cr>
+
+" Quick move in insert mode
+inoremap <c-f> <c-o>a
+inoremap <c-b> <c-o>h
+inoremap <c-right> <c-o>A
+inoremap <c-l> <c-o>A
+inoremap <c-left> <c-o>I
+inoremap <c-k> <c-o>I
+
+" Format file
+map <leader>f mmgg=G`m
+
+" Go to line and place cursor to middle
+nmap G Gzz
+
+" Toggle full screen
+map <silent> <F11>
+\    :call system("wmctrl -ir " . v:windowid . " -b toggle,fullscreen")<CR>
+
+" Treat long lines as break lines (useful when moving around in them)
+map j gj
+map k gk
+
+nmap cw ciw
+nmap dw diw
+
+" Map jj to Esc
+imap jj <esc>:w<cr>
+" Map : to <leader><space>
+map <leader><space> :
+" Fast show buffer
+map <leader>l :ls<cr>:b
+
+" Quick edit vimrc file
+map <leader>ev :tabe ~/.vim/sources/plugins<cr>
+map <leader>sv :source ~/.vimrc<cr>:noh<cr>
+"Automatically source the Vimrc file on save.
+augroup autosourcing
+    autocmd!
+    autocmd BufWritePost .vimrc source %
+augroup END
+
+" Disable highlight when <leader><cr> is pressed
+map <silent> <leader><cr> :noh<cr>
+
+" Smart way to move between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Close the current buffer
+map <leader>bd :Bclose<cr>:tabclose<cr>gT
+
+" Quick buffer switching
+nnoremap <silent> [b :bprevious<CR>
+nnoremap <silent> ]b :bnext<CR>
+nnoremap <silent> [B :bfirst<CR>
+nnoremap <silent> ]B :blast<CR>
+
+" Close all the buffers
+map <leader>ba :bufdo bd<cr>
+
+" Useful mappings for managing tabs
+map <leader>tn :tabnew<cr>
+map <leader>to :tabonly<cr>
+map <leader>tc :tabclose<cr>
+map <leader>tm :tabmove
+map <leader>t<leader> :tabnext
+
+" Let 'tl' toggle between this and the last accessed tab
+let g:lasttab = 1
+nmap <Leader>tl :exe "tabn ".g:lasttab<CR>
+au TabLeave * let g:lasttab = tabpagenr()
+
+" Opens a new tab with the current buffer's path
+" Super useful when editing files in the same directory
+map <leader>te :tabedit <c-r>=expand("%:p:h")<cr>/
+
+" Switch CWD to the directory of the open buffer
+map <leader>cd :cd %:p:h<cr>:pwd<cr>
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" => Editing mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Remap VIM 0 to first non-blank character
+map 0 ^
+
+" Move a line of text using ALT+[jk] or Comamnd+[jk] on mac
+nmap <leader>jj mz:m+<cr>`z
+nmap <leader>kk mz:m-2<cr>`z
+vmap <leader>jjj :m'>+<cr>`<my`>mzgv`yo`z
+vmap <leader>kkk :m'<-2<cr>`>my`<mzgv`yo`z

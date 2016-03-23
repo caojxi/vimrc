@@ -2,8 +2,6 @@
 let mapleader = ","
 let g:mapleader = ","
 
-source ~/.vim/sources/basic
-
-source ~/.vim/sources/plugins
-
 source ~/.vim/sources/mappings
+
+:map ,s :action SaveAll<CR>

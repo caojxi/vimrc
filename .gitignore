@@ -2,4 +2,6 @@
 .dropbox
 Icon?
 code/
-vim/
+vim/bundle
+vim/.init.vim-rplugin*
+vim/.netrwhist
