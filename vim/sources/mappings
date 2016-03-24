@@ -45,7 +45,8 @@ map <leader><space> :
 map <leader>l :ls<cr>:b
 
 " Quick edit vimrc file
-map <leader>ev :tabe ~/.vim/sources/plugins<cr>
+map <leader>ep :tabe ~/.vim/sources/plugins<cr> :set syntax=vim<cr>
+map <leader>em :tabe ~/.vim/sources/mappings<cr> :set syntax=vim<cr>
 map <leader>sv :source ~/.vimrc<cr>:noh<cr>
 "Automatically source the Vimrc file on save.
 augroup autosourcing
